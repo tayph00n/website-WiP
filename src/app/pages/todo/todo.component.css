@@ -18,13 +18,16 @@
 }
 
 .todo-container {
-  max-width: 600px;
+  width: 100%;          /* Set width to 100% of parent */
+  max-width: 600px;     /* Maintain max width */
+  min-width: 300px;     /* Add minimum width to prevent shrinking */
   margin: 0 auto;
   padding: 20px;
   font-family: "Kalam", serif;
   background-color: rgb(255,255,255,0.9);
   border-radius: 20px;
   box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+  box-sizing: border-box; /* Add box-sizing to include padding in width calculation */
 }
 
 h1 {
@@ -34,12 +37,14 @@ h1 {
 
 .todo-list {
   margin: 20px 0;
+  width: 100%;          /* Make list take full width of container */
 }
 
 .empty-state {
   text-align: center;
   color: gray;
   padding: 20px;
+  width: 100%;          /* Make empty state take full width */
 }
 
 .todo-item {
@@ -53,7 +58,8 @@ h1 {
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
   overflow: hidden;
-
+  width: 100%;          /* Make items take full width */
+  box-sizing: border-box; /* Include padding in width */
 }
 
 .todo-item.done {
@@ -78,7 +84,7 @@ h1 {
 .todo-actions {
   display: flex;
   gap: 5px;
-  flex-shrink: 0;
+  flex-shrink: 0;       /* Prevent shrinking */
 }
 
 .btn {
@@ -89,18 +95,22 @@ h1 {
   font-size: 14px;
   transition: background-color 0.2s;
   white-space: nowrap;
+  min-width: 40px;      /* Minimum button width */
+  padding: 8px 12px;
 }
 
 .btn-done {
   font-size: 1.2rem;
   background-color: mediumseagreen;
   color: white;
+  min-width: 45px;
 }
 
 .btn-delete {
   font-size: 1.2rem;
   background-color: crimson;
   color: white;
+  min-width: 45px;
 }
 
 .btn:disabled {
@@ -108,22 +118,23 @@ h1 {
   cursor: not-allowed;
 }
 
-
-
 .btn-add {
   background-color: dodgerblue;
   color: white;
+  min-width: 60px;
 }
 
 .btn-copy {
   background-color: mediumpurple;
   color: white;
+  min-width: 60px;
 }
 
 .actions {
   display: flex;
   justify-content: space-between;
   margin-top: 20px;
+  width: 100%;          /* Make actions take full width */
 }
 
 /* Popup styles */
@@ -146,7 +157,9 @@ h1 {
   padding: 20px;
   width: 80%;
   max-width: 500px;
+  min-width: 300px;     /* Add minimum width to prevent shrinking */
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+  box-sizing: border-box; /* Include padding in width */
 }
 
 .popup h2 {
@@ -170,18 +183,19 @@ h1 {
   display: flex;
   justify-content: flex-end;
   gap: 10px;
+  width: 100%;          /* Make popup actions take full width */
 }
-
-
 
 .btn-cancel {
   background-color: gray;
   color: white;
+  min-width: 70px;
 }
 
 .btn-confirm {
   background-color: dodgerblue;
   color: white;
+  min-width: 70px;
 }
 
 /* Drag and drop styles */
@@ -191,6 +205,7 @@ h1 {
   color: #888;
   display: flex;
   align-items: center;
+  flex-shrink: 0;       /* Prevent shrinking */
 }
 
 .drag-handle:active {
@@ -209,7 +224,6 @@ h1 {
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
   opacity: 0.8;
   cursor: grabbing;
-  /* Remove any transition to make it follow cursor instantly */
   transition: none !important;
 }
 
