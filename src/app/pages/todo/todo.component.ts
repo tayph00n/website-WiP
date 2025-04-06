@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { CdkDragDrop, moveItemInArray, DragDropModule } from '@angular/cdk/drag-drop';
 
 interface TodoItem {
   id: number;
@@ -11,7 +12,7 @@ interface TodoItem {
 @Component({
   selector: 'app-todo',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, DragDropModule],
   templateUrl: './todo.component.html',
   styleUrls: ['./todo.component.css']
 })
@@ -62,5 +63,10 @@ export class TodoComponent {
       .catch(err => {
         console.error('Could not copy text: ', err);
       });
+  }
+
+  // Handle the drop event for reordering todo items
+  onDrop(event: CdkDragDrop<TodoItem[]>): void {
+    moveItemInArray(this.todoItems, event.previousIndex, event.currentIndex);
   }
 }

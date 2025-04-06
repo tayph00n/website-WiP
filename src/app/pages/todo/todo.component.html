@@ -2,19 +2,25 @@
 <div class="todo-container">
   <h1>Todo List</h1>
 
-  <div class="todo-list">
+  <div class="todo-list" cdkDropList (cdkDropListDropped)="onDrop($event)">
     <div *ngIf="todoItems.length === 0" class="empty-state">
       No items in your todo list. Add something!
     </div>
 
-    <div *ngFor="let item of todoItems" class="todo-item" [class.done]="item.done">
+    <div *ngFor="let item of todoItems"
+         class="todo-item"
+         [class.done]="item.done"
+         cdkDrag>
+      <div class="drag-handle" cdkDragHandle>
+        <span class="drag-icon">⋮⋮</span>
+      </div>
       <span class="todo-text">{{ item.text }}</span>
       <div class="todo-actions">
         <button class="btn btn-done" (click)="toggleDone(item)">
-          {{ item.done ? 'Undone' : 'Done' }}
+          {{ item.done ? '❎' : '✅' }}
         </button>
         <button class="btn btn-delete" (click)="deleteTodo(item.id)">
-          Delete
+          🗑️
         </button>
       </div>
     </div>

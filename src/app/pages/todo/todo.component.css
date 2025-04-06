@@ -28,13 +28,11 @@
 }
 
 h1 {
-
   text-align: center;
   color: black;
 }
 
 .todo-list {
-
   margin: 20px 0;
 }
 
@@ -55,6 +53,7 @@ h1 {
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
   overflow: hidden;
+
 }
 
 .todo-item.done {
@@ -68,6 +67,7 @@ h1 {
   word-break: break-word;
   overflow-wrap: break-word;
   padding-right: 10px;
+  margin-top: 0.5rem;
 }
 
 .todo-item.done .todo-text {
@@ -83,7 +83,6 @@ h1 {
 
 .btn {
   font-family: "Kalam", serif;
-  padding: 8px 12px;
   border: none;
   border-radius: 3px;
   cursor: pointer;
@@ -92,21 +91,24 @@ h1 {
   white-space: nowrap;
 }
 
-.btn:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
 .btn-done {
-
+  font-size: 1.2rem;
   background-color: mediumseagreen;
   color: white;
 }
 
 .btn-delete {
+  font-size: 1.2rem;
   background-color: crimson;
   color: white;
 }
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+
 
 .btn-add {
   background-color: dodgerblue;
@@ -151,7 +153,6 @@ h1 {
   margin-top: 0;
   color: darkslategray;
   text-decoration: underline;
-
 }
 
 .todo-input {
@@ -171,6 +172,8 @@ h1 {
   gap: 10px;
 }
 
+
+
 .btn-cancel {
   background-color: gray;
   color: white;
@@ -179,6 +182,58 @@ h1 {
 .btn-confirm {
   background-color: dodgerblue;
   color: white;
+}
+
+/* Drag and drop styles */
+.drag-handle {
+  cursor: grab;
+  margin-right: 10px;
+  color: #888;
+  display: flex;
+  align-items: center;
+}
+
+.drag-handle:active {
+  cursor: grabbing;
+}
+
+.drag-icon {
+  margin-top: 0.75rem;
+  font-size: 18px;
+  line-height: 1;
+}
+
+.cdk-drag-preview {
+  box-sizing: border-box;
+  border-radius: 5px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  opacity: 0.8;
+  cursor: grabbing;
+  /* Remove any transition to make it follow cursor instantly */
+  transition: none !important;
+}
+
+.cdk-drag-placeholder {
+  opacity: 0.3;
+}
+
+.cdk-drag-animating {
+  transition: transform 150ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.todo-list.cdk-drop-list-dragging .todo-item:not(.cdk-drag-placeholder) {
+  transition: transform 150ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+/* this is for the drag and drop effect on the todo list when it's being dragged */
+.cdk-drop-list-dragging {
+  cursor: grabbing;
+}
+.cdk-drag-preview {
+  cursor: grabbing;
+}
+body.cdk-drag-dragging {
+  cursor: grabbing;
 }
 
 /* Responsive for small screens */
@@ -196,5 +251,10 @@ h1 {
   .todo-actions {
     width: 100%;
     justify-content: flex-end;
+  }
+
+  .drag-handle {
+    align-self: flex-start;
+    margin-bottom: 10px;
   }
 }
