@@ -12,9 +12,9 @@ html, body {
   align-items: center;
   /* Animated Gradient Background */
   background: repeating-linear-gradient(135deg,
-  blue 0%,
-  darkred 25%,
-  blue 50%);
+  darkblue 0%,
+  mediumpurple 25%,
+  darkblue 50%);
   background-size: 200% 200%;
   animation: gradientFlow 15s linear infinite;
 
