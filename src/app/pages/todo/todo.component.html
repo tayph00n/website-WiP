@@ -1,0 +1,51 @@
+<!-- todo.component.html -->
+<div class="main-container">
+<div class="todo-container">
+  <h1>Todo List</h1>
+
+  <div class="todo-list">
+    <div *ngIf="todoItems.length === 0" class="empty-state">
+      No items in your todo list. Add something!
+    </div>
+
+    <div *ngFor="let item of todoItems" class="todo-item" [class.done]="item.done">
+      <span class="todo-text">{{ item.text }}</span>
+      <div class="todo-actions">
+        <button class="btn btn-done" (click)="toggleDone(item)">
+          {{ item.done ? 'Undone' : 'Done' }}
+        </button>
+        <button class="btn btn-delete" (click)="deleteTodo(item.id)">
+          Delete
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="actions">
+    <button class="btn btn-add" (click)="openAddPopup()">Add Todo</button>
+    <button class="btn btn-copy" [disabled]="todoItems.length === 0" (click)="copyToClipboard()">
+      Copy to Clipboard
+    </button>
+  </div>
+
+  <!-- Add Todo Popup -->
+  <div class="popup-overlay" *ngIf="showAddPopup">
+    <div class="popup">
+      <h2>Add New Todo</h2>
+      <input
+        type="text"
+        [(ngModel)]="newTodoText"
+        placeholder="Enter todo item"
+        class="todo-input"
+        (keyup.enter)="addTodo()"
+      >
+      <div class="popup-actions">
+        <button class="btn btn-cancel" (click)="closeAddPopup()">Cancel</button>
+        <button class="btn btn-confirm" (click)="addTodo()" [disabled]="!newTodoText.trim()">
+          Add to List
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+</div>

@@ -1,0 +1,44 @@
+<div class="center-wrapper">
+  <div class="home-container">
+    <div class="header-text">
+      <h1>Hi, I'm Tayfun👋</h1>
+      <h2>TS • JS • CSS • C#</h2>
+      <h2>Unity • VisualStudio • Rider • Webstorm • Linux • Windows</h2>
+    </div>
+
+    <div class="content-wrapper">
+      <div class="text-container">
+        <p>
+          &nbsp;I am a developer from Karlsruhe, Germany.<br>
+          &nbsp;I'm passionate about building scalable <br>
+          &nbsp;and efficient applications. <br>
+          &nbsp;Always eager to learn new technologies!
+        </p>
+      </div>
+
+      <div class="profile-container">
+        <img
+          src="assets/media/profile.jpg"
+          alt="Tayfun's Profile"
+          class="profile-image"
+          #profileImage
+          (mousemove)="onMouseMove($event)"
+          (mouseleave)="onMouseLeave()"
+        >
+      </div>
+    </div>
+
+    <!-- Social Buttons -->
+    <div class="social-buttons">
+      <a href="https://github.com/tayph00n" target="_blank">
+        <img src="assets/media/Github.png" alt="GitHub" class="social-btn">
+      </a>
+      <a href="https://www.linkedin.com/in/tayfun-bolat-a23002289/" target="_blank">
+        <img src="assets/media/LinkedIn.png" alt="LinkedIn" class="social-btn">
+      </a>
+      <a [href]="mailtoLink">
+      <img src="assets/media/Email.png" alt="Email" class="social-btn">
+      </a>
+    </div>
+  </div>
+</div>

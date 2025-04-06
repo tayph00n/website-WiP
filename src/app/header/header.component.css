@@ -1,0 +1,28 @@
+header {
+  font-family: "Kalam", serif;
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #333;
+  color: white;
+  text-align: center;
+  padding: 10px 10px;
+  width: fit-content;
+  height: fit-content;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  z-index: 20; /* Ensure it's above other elements */
+
+}
+
+nav a {
+  color: white;
+  margin: 0 20px;
+  text-decoration: none;
+  font-size: 24px;
+}
+
+nav a:hover {
+  text-decoration: underline;
+}
