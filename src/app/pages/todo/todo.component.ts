@@ -1,45 +1,75 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { CdkDragDrop, moveItemInArray, DragDropModule } from '@angular/cdk/drag-drop';
-
-interface TodoItem {
-  id: number;
-  text: string;
-  done: boolean;
-}
+import { HttpClientModule } from '@angular/common/http';
+import { TodoService, TodoItem } from './todo.service';
 
 @Component({
   selector: 'app-todo',
   standalone: true,
-  imports: [CommonModule, FormsModule, DragDropModule],
+  imports: [CommonModule, FormsModule, DragDropModule, HttpClientModule],
   templateUrl: './todo.component.html',
-  styleUrls: ['./todo.component.css']
+  styleUrls: ['./todo.component.css'],
+  providers: [TodoService]
 })
-export class TodoComponent {
+export class TodoComponent implements OnInit {
   todoItems: TodoItem[] = [];
   newTodoText: string = '';
   showAddPopup: boolean = false;
   nextId: number = 1;
 
+  constructor(private todoService: TodoService) {}
+
+  ngOnInit(): void {
+    // Subscribe to todos from the service
+    this.todoService.getTodos().subscribe((todos: TodoItem[]) => {
+      this.todoItems = todos;
+    });
+
+    // Subscribe to nextId from the service
+    this.todoService.getNextId().subscribe((id: number) => {
+      this.nextId = id;
+    });
+  }
+
   addTodo(): void {
     if (this.newTodoText.trim()) {
-      this.todoItems.push({
-        id: this.nextId++,
+      const newTodo: TodoItem = {
+        id: this.nextId,
         text: this.newTodoText,
         done: false
+      };
+
+      this.todoService.addTodo(newTodo).subscribe({
+        next: () => {
+          this.newTodoText = '';
+          this.showAddPopup = false;
+        },
+        error: (error: any) => {
+          console.error('Error adding todo:', error);
+        }
       });
-      this.newTodoText = '';
-      this.showAddPopup = false;
     }
   }
 
   toggleDone(item: TodoItem): void {
-    item.done = !item.done;
+    const updatedItem = { ...item, done: !item.done };
+    this.todoService.updateTodo(updatedItem).subscribe({
+      error: (error: any) => {
+        console.error('Error updating todo:', error);
+        // Revert the change if the update fails
+        item.done = !item.done;
+      }
+    });
   }
 
   deleteTodo(id: number): void {
-    this.todoItems = this.todoItems.filter(item => item.id !== id);
+    this.todoService.deleteTodo(id).subscribe({
+      error: (error: any) => {
+        console.error('Error deleting todo:', error);
+      }
+    });
   }
 
   openAddPopup(): void {
@@ -68,5 +98,7 @@ export class TodoComponent {
   // Handle the drop event for reordering todo items
   onDrop(event: CdkDragDrop<TodoItem[]>): void {
     moveItemInArray(this.todoItems, event.previousIndex, event.currentIndex);
+    // Update the order in the service
+    this.todoService.updateTodoOrder(this.todoItems);
   }
 }
