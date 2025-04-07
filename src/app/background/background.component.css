@@ -1,0 +1,38 @@
+.metro-background {
+  filter: blur(10px);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  display: grid;
+  grid-template-columns: repeat(40, 1fr);
+  grid-template-rows: repeat(40, 1fr);
+  overflow: hidden;
+
+ /*gradient flow animation*/
+  background: repeating-linear-gradient(135deg,
+  darkblue 0%,
+  darkslateblue 25%,
+  darkblue 50%);
+  background-size: 200% 200%;
+  animation: gradientFlow 15s linear infinite;
+}
+
+.metro-square {
+  background-color: rgba(0, 120, 215, 0.3);
+  margin: 1px;
+  transition: transform 3s ease-in-out;
+  aspect-ratio: 1 / 1; /* Ensure squares are always square */
+  width: 100%;
+  height: 0;
+  padding-bottom: 100%; /* Alternative way to maintain square aspect ratio */
+  box-sizing: border-box;
+}
+
+/* Gradient Animation */
+@keyframes gradientFlow {
+  from { background-position: 0% 0%; }
+  to   { background-position: 100% 100%;}
+}
