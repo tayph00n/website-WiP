@@ -1,63 +1,205 @@
-/* Base Reset and Global Styles */
+/* Base Reset and Global Styles - Metro Design */
 html, body {
   cursor: default;
   height: 100%;
   width: 100%;
   margin: 0;
   padding: 0;
-  font-family: "Kalam", serif;
-  overflow: hidden;
+  font-family: "Segoe UI", "Roboto", sans-serif;
+  overflow-x: auto; /* Changed from hidden to auto to allow scrolling when needed */
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: flex-start;
   align-items: center;
-  /* Animated Gradient Background */
-  background: repeating-linear-gradient(135deg,
-  darkblue 0%,
-  mediumpurple 25%,
-  darkblue 50%);
-  background-size: 200% 200%;
-  animation: gradientFlow 15s linear infinite;
+  background-color: #0078D7; /* Fallback color if background component fails */
+  color: white;
+  position: relative;
+}
 
-  backdrop-filter: blur(10px);
+/* Content containers - EXACT SAME PROPERTIES FOR ALL PAGES */
+.home-container,
+.AboutMe-container,
+.SideInfo-container,
+.contact-container,
+.main-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  width: 75vw; /* Consistent width for all pages */
+  max-width: 1200px;
+  min-height: calc(100vh - 200px); /* Reduced height to create space at top and bottom */
+  margin: 70px auto 70px auto;
+  padding: 20px;
+  background-color: #0b1925;
+  box-shadow: none;
+  overflow-y: auto;
+  overflow-x: auto;
+  box-sizing: border-box;
+  position: relative;
+  z-index: 1;
+  left: 0; /* Explicitly set left position */
+  right: 0; /* Explicitly set right position */
+  transform: none;
+}
+
+/* Metro-style tile container for content */
+.metro-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-gap: 10px;
+  padding: 20px;
+  width: 75vw; /* Consistent width matching other containers */
+  max-width: 1200px;
+  position: relative;
+  z-index: 1;
+}
+
+.metro-tile {
+  background-color: #00B2F0;
+  color: white;
+  padding: 20px;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+  position: relative;
+  overflow: hidden;
+  box-shadow: none;
+  border: none;
+}
+
+.metro-tile:hover {
+  background-color: #0078D7;
+  transform: scale(1.02);
+}
+
+.metro-tile-large {
+  grid-column: span 2;
+  grid-row: span 2;
+}
+
+/* Typography for Metro design */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 300;
+  margin: 0 0 20px 0;
+  letter-spacing: -0.5px;
+}
+
+h1 { font-size: 42px; }
+h2 { font-size: 32px; }
+h3 { font-size: 24px; }
+
+p {
+  font-weight: 400;
+  line-height: 1.5;
+  margin: 0 0 15px 0;
+}
+
+/* Buttons in Metro style */
+.metro-button {
+  background-color: #0078D7;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-family: "Segoe UI", "Roboto", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.metro-button:hover {
+  background-color: #00B2F0;
+}
+
+/*animations for buttons and interactive elements */
+.social-btn, .btn {
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.social-btn:hover, .btn:hover {
+  transform: scale(1.2);
 }
 
 /* Webkit browsers (Chrome, Safari, newer versions of Opera) */
 ::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  width: 8px;
+  height: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: transparent;
+  background: #F0F0F0;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(136, 136, 136, 0.5);
-  border-radius: 10px;
+  background: #0078D7;
+  border-radius: 0;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(85, 85, 85, 0.7);
+  background: #00B2F0;
 }
 
 /* Firefox */
 * {
   scrollbar-width: thin;
-  scrollbar-color: rgba(136, 136, 136, 0.5) transparent;
+  scrollbar-color: #0078D7 #F0F0F0;
+}
+
+/* Navigation elements in Metro style */
+nav a {
+  color: white;
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: 400;
+  padding: 10px 15px;
+  transition: background-color 0.3s ease;
+}
+
+nav a:hover {
+  background-color: #00B2F0;
+  text-decoration: none;
+}
+
+/* Metro-style form elements */
+input, textarea, select {
+  border: 2px solid #0078D7;
+  padding: 10px;
+  font-family: "Segoe UI", "Roboto", sans-serif;
+  font-size: 16px;
+  background-color: white;
+  color: #333;
+  margin-bottom: 15px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+input:focus, textarea:focus, select:focus {
+  border-color: #00B2F0;
+  outline: none;
 }
 
 
-
-/* Gradient Animation */
-@keyframes gradientFlow {
-  from { background-position: 0 0; }
-  to   { background-position: 100% 100%;}
+/* Responsive adjustments for narrow viewports */
+@media (max-width: 768px) {
+  .home-container,
+  .AboutMe-container,
+  .SideInfo-container,
+  .contact-container,
+  .main-container {
+    width: 90vw; /* Wider container on small screens */
+  }
 }
 
-::-webkit-scrollbar {
-  display: none;
+/* Ensure content is above background */
+app-root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  width: 100%;
+  position: relative;
+  z-index: 1;
+  align-items: center;
 }
 
-
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+router-outlet {
+  flex: 1;
+}

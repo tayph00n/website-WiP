@@ -1,6 +1,6 @@
 /* Home Container */
 .home-container {
-  font-family: "Kalam", serif;
+  font-family: "Segoe UI", "Roboto", sans-serif;
   flex-grow: 1;
   display: flex;
   flex-direction: column;
@@ -8,16 +8,16 @@
   justify-content: flex-start;
   width: 75vw;
   max-width: 1200px;
-  height: calc(100vh - 200px);
-  margin-top: 70px;
-  margin-bottom: 40px;
-  background-color: rgba(128, 128, 128, 0.5);
-  border-radius: 20px;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+  min-height: calc(100vh - 200px);
+  margin: 70px auto 70px auto;
+  box-shadow: none;
   overflow-y: auto;
   box-sizing: border-box;
-  padding-top: 20px;
+  padding: 20px;
+  position: relative;
+  z-index: 1;
 }
+
 
 /* Header Styling */
 .header-text {
@@ -26,53 +26,53 @@
   align-items: center;
   width: 100%;
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
   gap: 10px;
 }
 
 .header-text h1,
 .header-text h2 {
-  font-weight: bold;
+  font-weight: 300;
   display: inline-block;
   width: fit-content;
   padding: 10px;
-  background-color: rgba(255, 255, 255, 0.3);
-  border-radius: 10px;
+  background-color: #0078D7;
+  color: white;
+  border-radius: 0;
   margin: 5px 0;
 }
 
 /* Content Wrapper */
 .content-wrapper {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 90%;
+  display: grid;
+  flex-direction: column;
+  justify-items: center;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 10px;
+  width: 100%;
   max-width: 1000px;
-  gap: 20px;
-  flex-wrap: wrap;
 }
 
 /* Text Container */
 .text-container {
-  font-weight: bold;
-  font-size: 1.2rem;
+  font-weight: 400;
+  font-size: 1.1rem;
   display: inline-block;
-  flex: 0 1 auto;
-  max-width: 380px;
-  width: fit-content;
-  padding: 15px;
-  background-color: rgba(255, 255, 255, 0.3);
-  border-radius: 10px;
-  text-align: left;
+  padding: 20px;
+  background-color: #F0F0F0;
+  color: #333;
+  border-radius: 0;
+  text-align: center;
+  line-height: 1.5;
 }
 
-/* Profile Image - Container for fixed border */
+/* Profile Image - Container */
 .profile-container {
   position: relative;
   width: 250px;
   height: 250px;
-  border-radius: 50%;
-  border: 5px solid black;
+  border-radius: 0;
+  border: none;
   overflow: hidden;
 }
 
@@ -86,58 +86,59 @@
 
 /* Social Buttons */
 .social-buttons {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
   gap: 15px;
   margin-top: 50px;
-  flex-wrap: wrap;
+  width: 100%;
+  max-width: 500px;
 }
 
 .social-btn {
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+  padding: 5px;
+  background-color: #0078D7;
+  border-radius: 0;
   object-fit: cover;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+  justify-self: center;
 }
 
 .social-btn:hover {
-  transform: scale(1.2);
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.75);
+  transform: scale(1.1);
+  background-color: #00B2F0; /
+  box-shadow: none;
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
   .home-container {
-    width: 90vw;
-    margin-top: 50px;
+    width: 95vw;
+    margin-top: 60px;
+    padding: 20px;
   }
 
   .header-text h1 {
-    font-size: 2.5rem;
+    font-size: 2rem;
   }
 
   .content-wrapper {
-    flex-direction: column;
-    align-items: center;
+    grid-template-columns: 1fr;
   }
 
-  .profile-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.1s ease-out;
-
+  .profile-container {
+    width: 200px;
+    height: 200px;
+    margin: 0 auto;
   }
 
   .text-container {
     text-align: center;
-    max-width: 100%;
   }
 
   .social-btn {
-    width: 80px;
-    height: 80px;
+    width: 60px;
+    height: 60px;
   }
 }

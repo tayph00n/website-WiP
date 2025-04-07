@@ -2,7 +2,13 @@
 <div class="todo-container">
   <h1>Todo List</h1>
 
-  <div class="todo-list" cdkDropList (cdkDropListDropped)="onDrop($event)">
+  <!-- Loading animation -->
+  <div class="loading-container" *ngIf="isLoading">
+    <div class="loading-text">Loading</div>
+    <div class="metro-spinner"></div>
+  </div>
+
+  <div class="todo-list" cdkDropList (cdkDropListDropped)="onDrop($event)" *ngIf="!isLoading">
     <div *ngIf="todoItems.length === 0" class="empty-state">
       No items in your todo list. Add something!
     </div>
@@ -26,7 +32,7 @@
     </div>
   </div>
 
-  <div class="actions">
+  <div class="actions" *ngIf="!isLoading">
     <button class="btn btn-add" (click)="openAddPopup()">+</button>
     <button class="btn btn-copy" [disabled]="todoItems.length === 0" (click)="copyToClipboard()">
       Copy to Clipboard

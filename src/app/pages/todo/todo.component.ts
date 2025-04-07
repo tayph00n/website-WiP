@@ -18,13 +18,24 @@ export class TodoComponent implements OnInit {
   newTodoText: string = '';
   showAddPopup: boolean = false;
   nextId: number = 1;
+  isLoading: boolean = true; // Add loading state
 
   constructor(private todoService: TodoService) {}
 
   ngOnInit(): void {
+    // Set loading state to true
+    this.isLoading = true;
+
     // Subscribe to todos from the service
-    this.todoService.getTodos().subscribe((todos: TodoItem[]) => {
-      this.todoItems = todos;
+    this.todoService.getTodos().subscribe({
+      next: (todos: TodoItem[]) => {
+        this.todoItems = todos;
+        this.isLoading = false;
+      },
+      error: (error: any) => {
+        console.error('Error loading todos:', error);
+        this.isLoading = false;
+      }
     });
 
     // Subscribe to nextId from the service

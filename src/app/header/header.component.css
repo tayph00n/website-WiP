@@ -1,32 +1,32 @@
 header {
-  font-family: "Kalam", serif;
+  font-family: "Segoe UI", "Roboto", sans-serif;
   position: fixed;
   top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  background-color: #333;
+  left: 0;
+  right: 0;
+  background-color: #0b1925;
   color: white;
   text-align: center;
-  padding: 10px 15px;
-  width: fit-content;
-  max-width: 95vw;
+  padding: 15px 0;
+  width: 100%;
   height: fit-content;
-  border-bottom-left-radius: 20px;
-  border-bottom-right-radius: 20px;
   z-index: 20; /* Ensure it's above other elements */
+  box-shadow: none;
 }
 
 nav {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 15px;
+  gap: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .nav-separator {
-  color: grey;
+  color: rgba(255, 255, 255, 0.5);
   text-decoration: none;
-  font-size: 24px;
+  font-size: 18px;
   white-space: nowrap;
   display: block;
 }
@@ -34,19 +34,29 @@ nav {
 nav a {
   color: white;
   text-decoration: none;
-  font-size: 24px;
+  font-size: 18px;
   white-space: nowrap;
   display: block;
+  padding: 5px 15px;
+  transition: background-color 0.3s ease;
 }
 
 nav a:hover {
-  text-decoration: underline;
+  background-color: #142d42;
+  text-decoration: none;
+  transform: scale(1.2);
+}
+
+/* Active navigation item */
+nav a.active {
+  background-color: rgba(0, 178, 240, 1);
+  font-weight: 500;
 }
 
 /* Media query for very small screens */
 @media (max-width: 480px) {
   header {
-    padding: 8px 12px;
+    padding: 10px 0;
   }
 
   nav {
@@ -54,7 +64,7 @@ nav a:hover {
   }
 
   nav a {
-    font-size: 20px;
-    padding: 3px 6px;
+    font-size: 16px;
+    padding: 5px 10px;
   }
 }
